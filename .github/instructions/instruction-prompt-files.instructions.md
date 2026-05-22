@@ -22,6 +22,12 @@ applyTo: "**/*.instructions.prompt.md"
 
 This file provides requirements for creating prompts that generate `*.instructions.md` files. These are **meta-prompts** - prompts whose purpose is to create instruction files for developers and AI assistants.
 
+## Canonical Source
+
+This file is a compatibility companion for older workflows.
+The canonical requirements live in `.github/instructions/instruction-prompt.instructions.md`.
+If rules conflict, follow `.github/instructions/instruction-prompt.instructions.md`.
+
 ## Why This Exists
 
 Instruction files (`*.instructions.md`) require strict AI provenance compliance and standardized structure. This file ensures that prompts generating such files automatically include all required metadata and compliance elements, preventing non-compliant instruction files.
@@ -98,6 +104,11 @@ prompt_metadata:
 ````
 `````
 
+### 4. Path Separator Normalization
+
+Use forward slashes (`/`) for all repository-relative paths.
+Do not use backslashes (`\\`) in repository-relative paths.
+
 ````
 
 ## Complete Template
@@ -140,6 +151,7 @@ prompt_metadata:
 - [ ] Category is 'documentation'
 - [ ] Output format is 'markdown'
 - [ ] ID follows `create-<domain>-instructions` pattern
+- [ ] Repository-relative paths use `/` and do not use `\\`
 
 ## Common Mistakes
 
@@ -147,6 +159,7 @@ prompt_metadata:
 ❌ Not referencing AI policy → Add CRITICAL statement
 ❌ Vague deliverable → Be explicit about metadata fields
 ❌ Forgetting applyTo field → Include when applicable
+❌ Windows-style separators in repo paths → Replace `\\` with `/`
 
 ## Creation Options
 

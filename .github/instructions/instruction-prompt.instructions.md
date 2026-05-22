@@ -33,6 +33,11 @@ All prompt files matching pattern: `**/*.instructions.prompt.md`
 
 Ensures that all instruction-generating prompts produce compliant output files with complete AI provenance metadata as required by `.github/instructions/ai-assisted-output.instructions.md`.
 
+## Canonical Source
+
+This file is the canonical source for `**/*.instructions.prompt.md` authoring requirements.
+If guidance in `.github/instructions/instruction-prompt-files.instructions.md` conflicts with this file, follow this file.
+
 ## Mandatory Requirements
 
 ### 1. Context Section Must Reference AI Policy
@@ -102,6 +107,11 @@ prompt_metadata:
   category: documentation
   output_format: markdown
 ```
+
+### 4. Path Separator Normalization
+
+All repository-relative paths in prompt metadata, templates, and examples MUST use forward slashes (`/`).
+Do not use Windows-style backslashes (`\\`) for repository-relative paths.
 
 ## Complete Example Template
 
@@ -197,6 +207,7 @@ Before creating or modifying an instruction-generating prompt, verify:
 - [ ] **Category is 'documentation'**: Instruction files are documentation
 - [ ] **Output format is 'markdown'**: Instruction files are Markdown
 - [ ] **ID follows convention**: Uses `create-<domain>-instructions` pattern
+- [ ] **Path separators are normalized**: Repository-relative paths use `/`, not `\\`
 
 ## Common Mistakes to Avoid
 
@@ -215,6 +226,10 @@ Before creating or modifying an instruction-generating prompt, verify:
 ❌ **Forgetting applyTo field** when applicable
 
 - Fix: Include `applyTo` in template if instruction file should apply to specific patterns
+
+❌ **Using Windows path separators in repository-relative paths**
+
+- Fix: Replace `\\` with `/` in all repository-relative paths and examples
 
 ## How to Create a New Instruction-Generating Prompt
 

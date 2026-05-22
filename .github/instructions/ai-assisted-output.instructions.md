@@ -696,6 +696,27 @@ jobs:
           done < changed_md.txt
           exit $rc
 
+      - name: Validate repository path separators in prompts and instructions
+        run: |
+          set -euo pipefail
+          rc=0
+          while IFS= read -r f; do
+            [ -z "$f" ] && continue
+            [ ! -f "$f" ] && continue
+            case "$f" in
+              *.prompt.md|*.instructions.md)
+                # Enforce forward slashes in repository-relative path examples.
+                if grep -nE '(^|[^[:alnum:]_])(\.github|specs|src|docs|features|requirements|use-cases)\\' "$f" >/tmp/path_sep_hits.txt; then
+                  echo "::error file=$f::Detected Windows-style path separator in repository-relative path. Use forward slashes (/)."
+                  cat /tmp/path_sep_hits.txt
+                  rc=1
+                fi
+                ;;
+            esac
+          done < changed_md.txt
+          rm -f /tmp/path_sep_hits.txt || true
+          exit $rc
+
   # Security Scanning
   security-scans:
     runs-on: ubuntu-latest

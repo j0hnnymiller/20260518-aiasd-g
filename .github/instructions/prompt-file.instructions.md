@@ -415,6 +415,21 @@ genTests.md → name: generate-tests ❌ (filename doesn't match name field)
 generate_tests.md → name: generate-tests ❌ (use kebab-case)
 ```
 
+### Path Normalization (Cross-Platform)
+
+- Use forward slashes (`/`) for all repository-relative paths in promptfile front matter and body.
+- Do not use backslashes (`\\`) in repository-relative paths.
+- Only use Windows backslashes in explicitly labeled OS-specific examples that require absolute Windows paths.
+
+**Examples:**
+
+```
+specs/web-calculator-specification.md ✅
+specs\\web-calculator-specification.md ❌
+.github/prompts/generate-tests.prompt.md ✅
+.github\\prompts\\generate-tests.prompt.md ❌
+```
+
 ## Validation Checklist
 
 ### Structure
@@ -424,6 +439,7 @@ generate_tests.md → name: generate-tests ❌ (use kebab-case)
 - [ ] Front-matter is valid YAML
 - [ ] No nested folders
 - [ ] If `name:` field is used, filename matches it (minus extension)
+- [ ] All repository-relative paths use forward slashes (`/`), not backslashes (`\\`)
 
 ### Required Fields
 
@@ -552,6 +568,17 @@ You are a helpful assistant who helps with coding.
 .github/prompts/generate-tests.md ✅
 ```
 
+### ❌ OS-Specific Separators In Repository Paths
+
+```markdown
+Implement using:
+
+- specs\web-calculator-implementation-plan.md
+- specs\web-calculator-specification.md
+```
+
+**Why wrong:** Repository paths should be portable and reviewable across OS environments. Use forward slashes for repo-relative paths.
+
 ## File Naming Rules
 
 **Pattern:** `{action}-{target}.md`
@@ -633,6 +660,7 @@ After creating a promptfile, verify:
 - **Name doesn't match** → If `name:` field is used, ensure filename matches it
 - **Arguments not prompted** → Check YAML syntax in `arguments:` section
 - **Behaves inconsistently** → Remove behavioral instructions, make deterministic
+- **Paths look Windows-specific** → Normalize repository-relative paths to forward slashes (`/`)
 
 ### 6. Post-Creation Requirements
 

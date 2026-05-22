@@ -57,9 +57,9 @@ version: "1.0.0"
 
 Implement Slice 1 end-to-end based on:
 
-- specs\web-calculator-implementation-plan.md
-- specs\web-calculator-vertical-slices.md
-- specs\web-calculator-specification.md
+- specs/web-calculator-implementation-plan.md
+- specs/web-calculator-vertical-slices.md
+- specs/web-calculator-specification.md
 
 ## Objective
 

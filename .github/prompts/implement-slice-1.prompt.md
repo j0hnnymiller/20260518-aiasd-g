@@ -22,6 +22,10 @@ arguments:
     type: string
     description: Command to run browser end-to-end tests
     default: npm run test:e2e
+  dev_command:
+    type: string
+    description: Command to run the app locally for manual showcase steps
+    default: npm run dev
 tags:
   [
     "calculator",
@@ -57,9 +61,9 @@ version: "1.0.0"
 
 Implement Slice 1 end-to-end based on:
 
-- specs/web-calculator-implementation-plan.md
-- specs/web-calculator-vertical-slices.md
-- specs/web-calculator-specification.md
+- {{implementation_plan}}
+- {{vertical_slices}}
+- {{specification}}
 
 ## Objective
 
@@ -67,7 +71,7 @@ Deliver a vertically complete Slice 1 that includes:
 
 - Core calculator UI shell
 - Numeric and operator input (+, -, \*, /, .)
-- Evaluation via = (and Enter support if already available)
+- Evaluation via =
 - Result display
 - Automated tests for Slice 1 acceptance scenarios
 
@@ -128,7 +132,7 @@ Use this script to demonstrate Slice 1 in a review session:
 
 1. Setup
 
-- Start the app using the repo-standard dev command.
+- Start the app with {{dev_command}}.
 - Confirm calculator loads and display starts in a valid default state.
 
 2. Live demo flow

@@ -9,6 +9,7 @@ type CalcAction =
   | { type: 'decimal' }
   | { type: 'equals' }
   | { type: 'clear' }
+  | { type: 'backspace' }
 
 const OPERATOR_CHARS = new Set<OperatorToken>(['+', '-', '*', '/'])
 const KEY_MAP: Readonly<Record<string, CalcAction>> = {
@@ -29,6 +30,7 @@ const KEY_MAP: Readonly<Record<string, CalcAction>> = {
   '.': { type: 'decimal' },
   Enter: { type: 'equals' },
   '=': { type: 'equals' },
+  Backspace: { type: 'backspace' },
   Escape: { type: 'clear' },
   Delete: { type: 'clear' },
 }
@@ -140,6 +142,27 @@ export function useCalculator() {
         expression.value = ''
         result.value = null
         error.value = false
+        return
+      }
+      case 'backspace': {
+        if (error.value) {
+          expression.value = ''
+          result.value = null
+          error.value = false
+          return
+        }
+
+        if (result.value !== null) {
+          expression.value = result.value.slice(0, -1)
+          result.value = null
+          return
+        }
+
+        if (expression.value.length === 0) {
+          return
+        }
+
+        expression.value = expression.value.slice(0, -1)
       }
     }
   }

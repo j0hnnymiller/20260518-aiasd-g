@@ -26,13 +26,22 @@ onUnmounted(() => {
 
     <div class="button-grid">
       <button
-        class="btn btn-clear span-two"
+        class="btn btn-clear"
         data-testid="btn-clear"
         type="button"
-        aria-label="Clear"
+        aria-label="All clear"
         @click="dispatch({ type: 'clear' })"
       >
-        C
+        AC
+      </button>
+      <button
+        class="btn btn-clear"
+        data-testid="btn-backspace"
+        type="button"
+        aria-label="Backspace"
+        @click="dispatch({ type: 'backspace' })"
+      >
+        ⌫
       </button>
       <button
         class="btn btn-operator"

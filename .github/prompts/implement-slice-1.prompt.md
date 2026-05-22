@@ -61,9 +61,9 @@ version: "1.0.0"
 
 Implement Slice 1 end-to-end based on:
 
-- {{implementation_plan}}
-- {{vertical_slices}}
-- {{specification}}
+- #file:{{implementation_plan}}
+- #file:{{vertical_slices}}
+- #file:{{specification}}
 
 ## Objective
 

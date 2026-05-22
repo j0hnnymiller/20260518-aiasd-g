@@ -38,6 +38,8 @@ Use GitHub Pages only for static hosting of the calculator. Keep the deployable 
 
 - Publish only static build output.
 - Use relative asset paths or set the correct base path for the Pages URL.
+- For Vite apps, define `base` in `vite.config.ts` to match the deployed repository subpath.
+- Avoid root-absolute runtime asset/module paths intended for subpath deployments.
 - Verify refresh behavior and any client-side routing fallback.
 - Keep deployment steps reproducible from source.
 - Do not rely on server-only features or runtime secrets.
@@ -48,6 +50,8 @@ Use GitHub Pages only for static hosting of the calculator. Keep the deployable 
 
 - [ ] Build output loads from the Pages URL
 - [ ] CSS, JS, and asset paths resolve correctly
+- [ ] `vite.config.ts` includes the correct `base` for Pages deployment path
+- [ ] No root-absolute asset/module paths break subpath hosting
 - [ ] Refresh does not break the app
 - [ ] Deployment uses only static artifacts
 - [ ] No server runtime, API secret, or backend dependency is required

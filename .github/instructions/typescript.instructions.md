@@ -43,6 +43,9 @@ Use TypeScript for calculator logic, DOM wiring, and shared types. Keep calculat
 - Model invalid states explicitly with `null`, unions, or result objects.
 - Define and document one percentage behavior contract, then enforce it consistently.
 - Keep keyboard-to-action mapping centralized so button and keyboard flows stay equivalent.
+- Do not call `preventDefault()` for modified key chords (`Ctrl`, `Meta`, `Alt`); preserve browser and OS shortcuts.
+- Normalize incomplete numeric tokens before evaluation (for example trailing `.`) so append flows cannot create guaranteed-invalid expressions.
+- Avoid redundant branches and dead-condition checks; if a conditional returns identical branches, simplify it.
 
 ## Validation Checklist
 
@@ -52,6 +55,9 @@ Use TypeScript for calculator logic, DOM wiring, and shared types. Keep calculat
 - [ ] Error states are represented explicitly
 - [ ] Percentage behavior is implemented and documented consistently
 - [ ] Keyboard and button inputs use the same command path
+- [ ] Keyboard handling preserves browser shortcuts when modifier keys are pressed
+- [ ] Trailing-decimal and similar partial-token states are normalized before operator append/evaluation
+- [ ] Conditionals were reviewed for redundant branches or no-op logic
 
 ## Summary
 

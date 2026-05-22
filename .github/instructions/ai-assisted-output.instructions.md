@@ -103,6 +103,15 @@ All AI-assisted artifacts must complete these steps after creation:
 4. **Metadata Verification**: Ensure all required provenance fields are present and correct
 5. **Link Validation**: Verify all internal links work correctly
 
+### Code PR Compliance Gate (Required)
+
+For pull requests that add or modify source files generated with AI assistance, complete these checks before opening or updating the PR:
+
+- Ensure `ai-logs/<yyyy>/<mm>/<dd>/<chat-id>/conversation.md` exists for the current chat.
+- Ensure `ai-logs/<yyyy>/<mm>/<dd>/<chat-id>/summary.md` exists for the current chat.
+- Update the repository `README.md` with a short artifact entry and link to the corresponding `ai_log` folder.
+- Confirm no new AI-assisted artifact is left without traceability to `chat_id` and `ai_log`.
+
 Authors must attach or embed the following metadata near the top of the artifact, following the [Metadata placement policy](#metadata-placement-policy):
 
 Conceptual fields (map to YAML when embedding):
@@ -479,6 +488,7 @@ Before committing AI-assisted content, verify:
 - [ ] Chat scaffolding in place before artifact creation
 - [ ] Embedded metadata used for Markdown (no sidecar files; see “Metadata placement policy”)- [ ] **Artifact optimized for AI agent consumption and processing**
 - [ ] **Content structured to minimize token usage while maintaining clarity and completeness**
+
 ## PR and Commit Checklist (Mandatory)
 
 Before submitting pull requests containing AI-assisted content:
@@ -720,7 +730,7 @@ jobs:
         uses: CycloneDX/gh-action@v2
         with:
           version: v1
-          args: 'generate -o sbom.xml -t application'
+          args: "generate -o sbom.xml -t application"
 
       # Verify SBOM integrity
       - name: Validate SBOM
@@ -800,7 +810,9 @@ jobs:
    - Audit security check logs regularly for patterns
 
 Note: This example uses bash and is compatible with Linux/macOS runners. For Windows runners, adapt the script to PowerShell or use WSL. For non-GitHub CI systems, apply equivalent logic in your platform’s scripting language. README updates are typically verified during PR review rather than automated CI checks (teams may extend CI to detect new AI-generated files and verify corresponding README entries if desired).
+
 ## Non-Compliance and Remediation
+
 - Missing logs or references: Scaffold `ai-logs/yyyy/mm/dd/<chat-id>/`, add front matter `ai_log` and `chat_id`, update README (optionally link back to the chat folder), then re-request review.
 - Orphaned artifacts: Create or reconstruct `conversation.md` from available history and update artifacts to reference it.
 - Incomplete metadata: Add missing required fields, timestamps, and task durations; verify operator and model details.
